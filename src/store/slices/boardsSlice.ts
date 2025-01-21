@@ -10,6 +10,11 @@ type TAddBoardAction = {
   board: IBoard;
 };
 
+type TDeleteListAction = {
+  boardId: string;
+  listId: string;
+};
+
 const initialState: TBoardsState = {
   modalActive: false,
   boardArray: [
@@ -65,8 +70,23 @@ const boardsSlice = createSlice({
     addBoard: (state, { payload }: PayloadAction<TAddBoardAction>) => {
       state.boardArray.push(payload.board); //내부에서 immer 라이브러리를 쓰기 때문에 불변성 신경쓰지 않아도 됨
     },
+    deleteList: (state, { payload }: PayloadAction<TDeleteListAction>) => {
+      state.boardArray = state.boardArray.map((board) =>
+        board.boardId === payload.boardId
+          ? {
+              ...board,
+              lists: board.lists.filter(
+                (list) => list.listId !== payload.listId
+              ),
+            }
+          : board
+      );
+    },
+    setModalActive: (state, { payload }: PayloadAction<boolean>) => {
+      state.modalActive = payload;
+    },
   },
 });
 
-export const {addBoard} = boardsSlice.actions;
+export const { addBoard, deleteList, setModalActive } = boardsSlice.actions;
 export const boardsReducer = boardsSlice.reducer;
