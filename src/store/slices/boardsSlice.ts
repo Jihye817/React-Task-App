@@ -1,9 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IBoard } from "../../types";
 
 type TBoardsState = {
   modalActive: boolean;
   boardArray: IBoard[];
+};
+
+type TAddBoardAction = {
+  board: IBoard;
 };
 
 const initialState: TBoardsState = {
@@ -57,7 +61,12 @@ const initialState: TBoardsState = {
 const boardsSlice = createSlice({
   name: "boards",
   initialState,
-  reducers: {},
+  reducers: {
+    addBoard: (state, { payload }: PayloadAction<TAddBoardAction>) => {
+      state.boardArray.push(payload.board); //내부에서 immer 라이브러리를 쓰기 때문에 불변성 신경쓰지 않아도 됨
+    },
+  },
 });
 
+export const {addBoard} = boardsSlice.actions;
 export const boardsReducer = boardsSlice.reducer;
