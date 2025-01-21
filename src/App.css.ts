@@ -1,9 +1,9 @@
 import { createGlobalTheme, style } from "@vanilla-extract/css";
 
-export const vars = createGlobalTheme("root", {
+export const vars = createGlobalTheme(":root", {
   color: {
     main: "#ffa726",
-    mainDarker: "#f57c00",
+    mainDarker: "#769FCD",
     mainFaded: "#ffb74d",
     mainFadedBright: "#ffb74da6",
     list: "rgb(235, 236, 240)",
@@ -13,7 +13,7 @@ export const vars = createGlobalTheme("root", {
     darkText: "rgb(24, 42, 77)",
     secondaryDarkText: "rgb(94, 108, 132)",
     secondaryDarkTextHover: "rgb(218, 219, 225)",
-    selectedTab: "rgb(137, 176, 174)",
+    selectedTab: "#F2AE66",
     updateButton: "rgb(237, 180, 88)",
     deleteButton: "rgb(237, 51, 88)",
   },
@@ -43,6 +43,7 @@ export const vars = createGlobalTheme("root", {
 });
 
 export const appContainer = style({
+  fontFamily: vars.font.body,
   display: "flex",
   flexDirection: "column",
   minHeight: "100vh",
