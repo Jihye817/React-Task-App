@@ -43,7 +43,6 @@ const BoardList: FC<TBoardListProps> = ({
   const handleLogin = () => {
     signInWithPopup(auth, provider)
       .then((userCredential) => {
-        console.log(userCredential);
         dispatch(
           setUser({
             email: userCredential.user.email,
